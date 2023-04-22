@@ -1,0 +1,88 @@
+﻿@model MTGDeckBuilder.ViewModels.Deck.IndexViewModel;
+@using MTGDeckBuilder.Services.DeckServices;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>This is the deck Index Page.</h1>
+<br />
+<div class="text-center">
+    <form method="get" asp-controller="Deck" asp-action="Index">
+        <button type="button" onclick="location.href='@Url.Action("CreateDeck", "Deck")'">Create Deck</button>
+        <label for="filter">Filter</label>
+        <input type="text" name="filter" id="filter" value="@Model.Filter" />
+
+            <label for="sort">Sort</label>
+            <select name="sort" id="sort">
+
+                <option value="null" disabled selected="@(Model.Sort is null)">-sort-</option>
+                @foreach (var val in EnumUtil.ToList<SortOption>())
+                {
+                    <option selected="@(val.id == (int?)Model.Sort)" value="@val.id">@val.name</option>
+                }
+            </select>
+            <button type="submit">Search</button>
+
+            @if (Model.Decks != null)
+            {
+                <br/>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Color</th>
+                            <th>Owner</th>
+                            <th>Date Created</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var deck in Model.Decks)
+                        {
+                            <tr>
+                                <td>@deck.Name</td>
+                                <td>@if (deck.Black == true) { <img src= "Resources/ColorIcons/B.png" title="b"/> ;} </td>
+                                <td>@if (deck.Blue == true) { <img src= "~/Resources//ColorIcons/U.png" title="u"/> ;}</td>
+                                <td>@if (deck.Red == true) { <img src= "../Resources//ColorIcons/R.png" title="r"/> ;}</td>
+                                <td>@if (deck.Green == true) { <img src= "../Resources//ColorIcons/G.png" title="g"/> ;}</td>
+                                <td>@if (deck.White == true) { <img src= "../Resources//ColorIcons/W.png"  title="w"/> ;}</td>
+                                <td>@if (deck.Colorless == true) { <img src= "../Resources//ColorIcons/C.png" title="c"/> ;}</td>
+                                <td>@deck.CreatedByName</td>
+                                <td>@deck.CreatedDate</td>
+                                <td>
+                                    @Html.ActionLink("ReadDeck", "ReadDeck", routeValues: new { deckId = @deck.Id }, htmlAttributes: null)
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+    </form>
+    @{
+        var prevDisabled = !Model.Decks.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.Decks.HasNextPage ? "disabled" : "";
+    }
+
+    <a asp-controller="Deck"
+       asp-action="Index"
+       asp-route-sort=@Model.Sort
+       asp-route-pageIndex="@(Model.Decks.PageIndex - 1)"
+       asp-route-filter=@Model.Filter
+       class="btn btn-primary @prevDisabled">
+        Previous
+    </a>
+    <a asp-controller="Deck"
+       asp-action="Index"
+       asp-route-sort=@Model.Sort
+       asp-route-pageIndex="@(Model.Decks.PageIndex + 1)"
+       asp-route-filter=@Model.Filter
+       class="btn btn-primary @nextDisabled">
+        Next
+    </a>
+</div>
+
+
+

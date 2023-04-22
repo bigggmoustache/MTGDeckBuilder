@@ -1,0 +1,58 @@
+﻿@model MTGDeckBuilder.ViewModels.Deck.ReadDeckViewModel;
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1>This is the Read Deck View</h1>
+<table>
+    <tbody>
+        @if (Model.Deck != null && Model.CardsInDeck != null)
+        {
+            @foreach (var prop in Model.Deck.GetType().GetProperties())
+            {
+                //lists values of properties of the Deck
+                @if (prop.GetValue(Model.Deck) != null)
+                {
+                    <tr>
+                        <td>@prop.Name</td>
+                        <td>@prop.GetValue(Model.Deck)</td>
+                    </tr>
+                }
+            }
+            <br />
+            <table>
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Color</th>
+                        <th>ManaCost</th>
+                        <th>Power</th>
+                        <th>Toughness</th>
+                        <th>Type</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.CardsInDeck.Count(); i++)
+                    {
+                        <tr>
+                            <td><img src=@Model.CardsInDeck[i].ImageUrl /></td>
+                            <td>@Model.CardsInDeck[i].Name</td>
+                            <td>@Model.CardQuantities[i]</td>
+                            <td>@Model.CardsInDeck[i].ManaCost</td>
+                            <td>@Model.CardsInDeck[i].ManaCost</td>
+                            <td>@Model.CardsInDeck[i].Power</td>
+                            <td>@Model.CardsInDeck[i].Toughness</td>
+                            <td>@Model.CardsInDeck[i].Type</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,22 @@
+﻿@model MTGDeckBuilder.ViewModels.Deck.CreateDeckViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@if (Model.IsOverDeckLimit == true)
+{
+    <span style="color:red;">Deck limit is 5. You must delete a deck before creating another.</span>
+
+}
+
+<div class="text-center">
+    <form method="post" asp-controller="Deck" asp-action="CreateDeck" class="form-inline" style="width:60%">
+        <div class="form-group" style="width:100%">
+            <input type="text" asp-for="Name" class="form-control" placeholder="Name">
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <br />
+    </form>
+</div>
+

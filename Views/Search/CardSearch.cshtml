@@ -1,0 +1,50 @@
+﻿@model MTGDeckBuilder.Models.Search.CardSearchViewModel
+
+<div class="text-center">
+    @if (!String.IsNullOrEmpty(Model.Error)) { <p style="color:red;">@Model.Error</p>}
+    <form method="post" asp-controller="Search" asp-action="CardSearch" style="width:75%%">
+        <div class="form-group" style="width:100%">
+            <input type="text" asp-for="Query" class="form-control" placeholder="Search">
+            <button type="submit" class="btn btn-primary">Search</button>
+
+        </div>
+        @if (Model.Query != null && Model.CardList != null)
+        {
+            <h1>There were @Model.CardList.Count() results.</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var card in Model.CardList)
+                    {
+                        <tr>
+                            <td>
+                                <img src=@card.ImageUrl />
+                            </td>
+                            <td>
+                                @card.Name
+                            </td>
+                            <td>
+                                @Html.ActionLink("Add Card", "AddCardToDb", "Search", card);
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        }
+    </form>
+</div>

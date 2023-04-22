@@ -1,0 +1,21 @@
+﻿@model MTGDeckBuilder.ViewModels.Search.AddCardToDeckViewModel
+
+<h1>Which deck would you like to add this card to?</h1>
+
+<form method="post" asp-controller="Search" asp-action="AddCardToDeck" style="width:75%%">
+    <div class="form-group" style="width:100%">
+        @if (Model.UserDecks != null)
+        {
+            <label for="DeckSelected">Select Deck To Add To: </label>
+            <select name="DeckSelected" id="DeckSelected">
+                @foreach (var deck in Model.UserDecks)
+                {
+                    <option value="">------</option>
+                    <option value="@deck.Name">@deck.Name</option>
+                }
+            </select>
+            <input type="hidden" asp-for="CardMultiverseId" value="@Model.CardMultiverseId"/>
+        }
+        <button type="submit" class="btn btn-primary">Add To Deck</button>
+    </div>
+</form>
