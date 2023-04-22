@@ -1,0 +1,56 @@
+﻿@model MTGDeckBuilder.ViewModels.MyDeckViewModel
+
+@{
+    ViewData["Title"] = "My Deck";
+}
+
+<h1>My Deck</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Image
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Cards)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="" />
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+    <td colspan="2">
+        <div class="row">
+
+                @foreach (var card in Model.SourceCard)
+                {
+                <div class="row">
+                    <div class="card" style="width: 18rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">@card.Id</h5>
+                            <img src="@card.ImageUrl" class="d-block w-100" alt="...">
+                            <form method="POST" action="Add">
+                                <a class="nav-link text-dark dropdown-item" asp-controller="MyDeck" asp-action="Add" asp-route-id="@($"{Model.DeckId},{card.Id}")">Add to deck</a>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+                }
+        </div>
+    </td>
+    </tfoot>
+</table>

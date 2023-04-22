@@ -1,0 +1,89 @@
+﻿@model MTGDeckBuilder.DataModels.Deck
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Deck</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedByName" class="control-label"></label>
+                <input asp-for="CreatedByName" class="form-control" />
+                <span asp-validation-for="CreatedByName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedById" class="control-label"></label>
+                <input asp-for="CreatedById" class="form-control" />
+                <span asp-validation-for="CreatedById" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedDate" class="control-label"></label>
+                <input asp-for="CreatedDate" class="form-control" />
+                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastModified" class="control-label"></label>
+                <input asp-for="LastModified" class="form-control" />
+                <span asp-validation-for="LastModified" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Color" class="control-label"></label>
+                <input asp-for="Color" class="form-control" />
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="White" class="control-label"></label>
+                <input asp-for="White" class="form-control" />
+                <span asp-validation-for="White" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Black" class="control-label"></label>
+                <input asp-for="Black" class="form-control" />
+                <span asp-validation-for="Black" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Red" class="control-label"></label>
+                <input asp-for="Red" class="form-control" />
+                <span asp-validation-for="Red" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Blue" class="control-label"></label>
+                <input asp-for="Blue" class="form-control" />
+                <span asp-validation-for="Blue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Green" class="control-label"></label>
+                <input asp-for="Green" class="form-control" />
+                <span asp-validation-for="Green" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Colorless" class="control-label"></label>
+                <input asp-for="Colorless" class="form-control" />
+                <span asp-validation-for="Colorless" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

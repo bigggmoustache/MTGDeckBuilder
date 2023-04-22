@@ -18,7 +18,7 @@ namespace MTGDeckBuilder.DataModels
         public bool? Blue { get; set; }
         public bool? Green { get; set; }
         public bool? Colorless { get; set; }
-        public List<CardDeck> CardDecks { get; set; }
+        public List<CardDeck> Cards { get; set; }
 
     }
 }
